@@ -2,18 +2,32 @@ namespace csharp_text_analyser_chashafe
 {
     public class CharIterator : Iterator
     {
-        public CharIterator(object FileContent) {}
+        int filecontentLength;
+        int index = -1;
+        string localContent;
+
+        /* ----- constructors -----*/ 
+        public CharIterator(FileContent filecontent) 
+        {
+            localContent = filecontent.ToString();
+            filecontentLength = localContent.Length;
+        }
+        public CharIterator() {}
+
+        /* ----- methods -----*/ 
         public bool HasNext()
         {
-            return true;
+            index = index + 1;
+            if (index < localContent.Length)
+            {
+                return true;
+            }
+            return false;
         }
         public string MoveNext()
         {
-            return "";
+            return localContent[index].ToString();
         }
-        public void Remove()
-        {
-
-        }
+        public void Remove(){}
     }    
 }

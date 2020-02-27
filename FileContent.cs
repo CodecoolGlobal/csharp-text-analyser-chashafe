@@ -1,49 +1,47 @@
 namespace csharp_text_analyser_chashafe
 {
-    class FileContent : IterableText
-    {
-        string FileContent;
-        Iterator Chariterator()
-        {
-            
-        }
-
-        Iterator Worditerator()
-        {
-
-        }
-        string GetFileName()
-        {
-            return "";
-        }
-        public static void ReadFile() // get sth from file, LINE by LINE
-        {
-            string text = System.IO.File.ReadAllText(@"Results.txt");
-            System.Console.WriteLine("Content is:\n{0}", text);
-        }
     public class FileContent : IterableText
     {
-        string sth;
-        public FileContent(string sth) {
-            this.sth = sth;
-        }
-        public Iterator CharIterator() 
+        string fileName 
         {
+            get => fileName; 
+            set => fileName = System.Console.ReadLine();
+        }
+        string fileContent;
 
-            Iterator Char_sth;
-            return Char_sth;
+        /* ---- constructors ----- */
+        public FileContent(string fileName)
+        {
+            fileContent = System.IO.File.ReadAllText(fileName);
+        }
+        public FileContent(){}
+
+        /* ---- methods ----- */
+        public Iterator CharIterator()
+        {
+            Iterator u = new CharIterator(); //rzutowanie???
+            while (u.HasNext())
+            {
+                u.MoveNext();
+            }
+            return u;
         }
         public Iterator WordIterator()
         {
-            Iterator Word_sth;
-            return Word_sth;
+            Iterator i = WordIterator();
+            while (i.HasNext())
+            {
+                i.MoveNext();
+            }
+            return i;
         }
-        string GetFilename()
-        {
-            var sth = System.Console.ReadLine();
-            return sth;
-        }
-
-
+        internal string GetWord(int i) => fileContent.Split()[i];
+        internal int GetTextLength() => fileContent.Length;    
+        
+        // string GetFilename()
+        // {
+        //     fileName = System.Console.ReadLine();
+        //     return fileName;
+        // }
     }
 }
