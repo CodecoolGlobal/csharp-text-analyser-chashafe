@@ -4,13 +4,14 @@ namespace csharp_text_analyser_chashafe
     {
         int filecontentLength = new FileContent().GetTextLength();
         static int index = -1;
-        string word;
+        string word, localContent;
 
         /* ----- constructors -----*/ 
         public WordIterator(FileContent fileContent)
         {
+            localContent = fileContent.ToString();
         } 
-        public WordIterator() { }
+        // public WordIterator() { }
 
         /* ----- methods -----*/ 
         public bool HasNext()
@@ -23,6 +24,10 @@ namespace csharp_text_analyser_chashafe
             word = new FileContent().GetWord(index);
             return word;
         }
-        public void Remove(){}
+        public void Remove()
+        {/* 
+        analogiczny problem to CharIterator
+        */
+        }
     }
 }

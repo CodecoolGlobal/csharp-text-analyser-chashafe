@@ -2,6 +2,8 @@ namespace csharp_text_analyser_chashafe
 {
     public class FileContent : IterableText
     {
+
+        /* ---ta klasa to kolekcja iteratorów ---*/
         string fileName 
         {
             get => fileName; 
@@ -19,7 +21,7 @@ namespace csharp_text_analyser_chashafe
         /* ---- methods ----- */
         public Iterator CharIterator()
         {
-            Iterator u = new CharIterator(); //rzutowanie???
+            Iterator u = new CharIterator(this); //rzutowanie??? ; jak przekazać object typu FileContent tutaj??
             while (u.HasNext())
             {
                 u.MoveNext();
@@ -28,14 +30,18 @@ namespace csharp_text_analyser_chashafe
         }
         public Iterator WordIterator()
         {
-            Iterator i = WordIterator();
-            while (i.HasNext())
+            Iterator it = new WordIterator(this); // jak przekazać object typu FileContent tutaj??
+            while (it.HasNext())
             {
-                i.MoveNext();
+                it.MoveNext();
             }
-            return i;
+            return it;
         }
-        internal string GetWord(int i) => fileContent.Split()[i];
+        internal string GetWord(int i)
+        {
+            char[] separators = {' ', ',', '-'};
+            return fileContent.Split(separators, System.StringSplitOptions.RemoveEmptyEntries)[i];
+        }
         internal int GetTextLength() => fileContent.Length;    
         
         // string GetFilename()
