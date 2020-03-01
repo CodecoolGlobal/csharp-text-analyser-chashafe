@@ -4,38 +4,31 @@ namespace csharp_text_analyser_chashafe
     {
 
         /* ---ta klasa to kolekcja iteratorów ---*/
-        string fileName 
+        internal string fileName 
         {
             get => fileName; 
-            set => fileName = System.Console.ReadLine();
+            private set => fileName = System.Console.ReadLine();
         }
-        string fileContent;
+        internal string fileContent {get; private set;}
+
 
         /* ---- constructors ----- */
         public FileContent(string fileName)
         {
-            fileContent = System.IO.File.ReadAllText(fileName);
+            this.fileContent = System.IO.File.ReadAllText(fileName);
         }
         public FileContent(){}
 
         /* ---- methods ----- */
         public Iterator CharIterator()
         {
-            Iterator u = new CharIterator(this); //rzutowanie??? ; jak przekazać object typu FileContent tutaj??
-            while (u.HasNext())
-            {
-                u.MoveNext();
-            }
-            return u;
+            Iterator newChariter = new CharIterator(this); 
+            return newChariter;
         }
         public Iterator WordIterator()
         {
-            Iterator it = new WordIterator(this); // jak przekazać object typu FileContent tutaj??
-            while (it.HasNext())
-            {
-                it.MoveNext();
-            }
-            return it;
+            Iterator newWordIter = new WordIterator(this); 
+            return newWordIter;
         }
         internal string GetWord(int i)
         {

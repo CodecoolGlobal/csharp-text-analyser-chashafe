@@ -5,5 +5,6 @@ namespace csharp_text_analyser_chashafe
         bool HasNext();
         string MoveNext();
         void Remove();
+        void IncreaseIndex(); // added
     }    
 }
