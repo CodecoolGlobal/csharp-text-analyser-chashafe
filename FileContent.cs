@@ -4,43 +4,51 @@ namespace csharp_text_analyser_chashafe
     {
 
         /* ---ta klasa to kolekcja iteratorów ---*/
-        internal string fileName 
+        internal string fileName
         {
-            get => fileName; 
-            private set => fileName = System.Console.ReadLine();
+            get => fileName;
+            // private set => fileName = System.Console.ReadLine();
         }
-        internal string fileContent {get; private set;}
+        internal string fileContent { get; private set; }
 
 
         /* ---- constructors ----- */
         public FileContent(string fileName)
         {
-            this.fileContent = System.IO.File.ReadAllText(fileName);
+            // this.fileContent = System.IO.File.ReadAllText(fileName);
+            this.fileContent = GetFile(fileName);
         }
-        public FileContent(){}
 
         /* ---- methods ----- */
         public Iterator CharIterator()
         {
-            Iterator newChariter = new CharIterator(this); 
+            Iterator newChariter = new CharIterator(this);
             return newChariter;
         }
         public Iterator WordIterator()
         {
-            Iterator newWordIter = new WordIterator(this); 
+            Iterator newWordIter = new WordIterator(this);
             return newWordIter;
         }
         internal string GetWord(int i)
         {
-            char[] separators = {' ', ',', '-'};
+            char[] separators = { ' ', ',', '-' };
             return fileContent.Split(separators, System.StringSplitOptions.RemoveEmptyEntries)[i];
         }
-        internal int GetTextLength() => fileContent.Length;    
+        internal int GetTextLength() => fileContent.Length;
+
+        string GetFile(string fileName)
+        {
+            if (fileName == null)
+            {
+                throw new System.ArgumentNullException("path");
+            }
+            if (fileName.Length == 0)
+            {
+                throw new System.ArgumentException("Argument_EmptyPath");
+            }
+            return System.IO.File.ReadAllText(fileName);
+        }
         
-        // string GetFilename()
-        // {
-        //     fileName = System.Console.ReadLine();
-        //     return fileName;
-        // }
     }
 }
